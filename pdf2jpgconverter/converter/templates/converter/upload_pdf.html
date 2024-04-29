@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF</title>
+</head>
+<body>
+    <h1>Upload PDF</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="pdf_file">
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if uploaded_file_url %}
+    <h2>PDF Uploaded Successfully</h2>
+    <p>Uploaded PDF: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    <h2>Converted Images:</h2>
+    {% for image in images %}
+    <img src="{{ image.url }}" alt="Page {{ forloop.counter }}">
+    {% endfor %}
+    {% endif %}
+</body>
+</html>
